@@ -348,7 +348,7 @@
                     <li><strong>阵营：</strong>只要有一张狼，就是狼人阵营。</li>
                     <li><strong>金宝宝：</strong>两张都是平民，每局至少1个。</li>
                     <li><strong>限制：</strong>狼和预言家不能在同一人手里。</li>
-                    <li><strong>狼人数量：</strong>5人≥2狼、6人≥3狼、7人≥3狼、8人≥4狼。</li>
+                    <li><strong>狼牌配置：</strong>5人2张狼牌、6人3张、7人3张、8人4张；若出现双狼，狼人玩家数会相应减少。</li>
                 </ul>
             </div>
         </div>
@@ -609,6 +609,11 @@
         document.getElementById('dealBtn').addEventListener('click', () => {
             if (!currentPlayers) return;
             possibilities = dealCards(currentPlayers, 5);
+            if (possibilities.length === 0) {
+                document.getElementById('results').classList.remove('show');
+                alert('本次没有生成有效发牌方案，请重新点击发牌。');
+                return;
+            }
             currentPossibilityIndex = 0;
             displayPossibility(0);
             document.getElementById('results').classList.add('show');
